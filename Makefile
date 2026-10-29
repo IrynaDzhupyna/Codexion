@@ -1,29 +1,24 @@
-SRC = .
 NAME = codexion
-HEADER = codexion.h
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-ARGS = 6 900 200 200 200 10 60 fifo
+HEADER = codexion.h
 
-SRC = main.c utils.c
+SRC = main.c
 
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
-
-test-val: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARGS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
 
 clean:
-	rm -f $(OBJS)
+	rm -r $(OBJS)
 
 fclean: clean
-	rm -f $(NAME) a.out
+	rm -r $(NAME)
 
 re: fclean all
 
