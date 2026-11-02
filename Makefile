@@ -5,7 +5,9 @@ CFLAGS = -Wall -Wextra -Werror -pthread
 
 HEADER = codexion.h
 
-SRC = main.c
+SRC = main.c\
+      parser.c\
+      print.c
 
 OBJS = $(SRC:.c=.o)
 
