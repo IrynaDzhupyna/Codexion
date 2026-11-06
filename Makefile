@@ -7,9 +7,13 @@ HEADER = codexion.h
 
 SRC = main.c\
       parser.c\
+      coders.c\
+      dongles.c\
       print.c
 
 OBJS = $(SRC:.c=.o)
+
+ARGS = 2 200 200 200 200 2 100 fifo
 
 all: $(NAME)
 
@@ -24,4 +28,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test: $(NAME)
+	./$(NAME) $(ARGS)
+
+.PHONY: all clean fclean re test
