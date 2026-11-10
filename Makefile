@@ -7,13 +7,13 @@ HEADER = codexion.h
 
 SRC = main.c\
       parser.c\
-      coders.c\
       dongles.c\
+      coders.c\
       print.c
 
 OBJS = $(SRC:.c=.o)
 
-ARGS = 2 200 200 200 200 2 100 fifo
+ARGS = 5 200 200 200 200 2 100 fifo
 
 all: $(NAME)
 

@@ -20,8 +20,10 @@ void	print_coders(t_args arr, t_coder *coders)
 	while (i < arr.number_of_coders)
 	{
 		printf("Coder ID: %i\n", coders[i].id);
-		printf("Thread result: %lu\n", coders[i].thread);
-		printf("Last_compile_start: %lu\n", coders[i].last_compile_start);
+		//printf("Thread result: %lu\n", coders[i].thread);
+	//	printf("Last_compile_start: %lu\n", coders[i].last_compile_start);
+		printf("Left dongle ID: %i\n", coders[i].left_dongle);
+		printf("Right dongle ID: %i\n\n", coders[i].right_dongle);
 		i++;
 	}
 }
@@ -34,6 +36,7 @@ void	print_dongles(t_args arr, t_dongle *dongles)
 	while (i < arr.number_of_coders)
 	{
 		printf("Dongle ID: %i\n", dongles[i].id);
+		printf("In Use: %d\n", dongles[i].in_use);
 		i++;
 	}
 }
