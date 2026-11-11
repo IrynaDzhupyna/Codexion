@@ -6,7 +6,7 @@
 /*   By: irdzhupy <irdzhupy@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 18:34:01 by irdzhupy          #+#    #+#             */
-/*   Updated: 2026/11/10 11:14:20 by irdzhupy         ###   ########.fr       */
+/*   Updated: 2026/11/11 11:54:56 by irdzhupy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	init_dongles(t_args arr, t_dongle *dongles)
 	{
 		dongles[i].id = i + 1;
 		dongles[i].in_use = false;
+		if (pthread_mutex_init(&dongles[i].mutex, NULL) != 0)
+			return (0);
 		i++;
 	}
 	return (1);

@@ -6,12 +6,13 @@
 /*   By: irdzhupy <irdzhupy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 19:34:42 by irdzhupy          #+#    #+#             */
-/*   Updated: 2026/11/10 11:15:36 by irdzhupy         ###   ########.fr       */
+/*   Updated: 2026/11/11 14:33:37 by irdzhupy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
+// now if nb_coder == 1, left and right dongle is the same
 int	init_coders(t_args arr, t_dongle *dongles, t_coder *coders)
 {
 	int	i;
@@ -27,12 +28,10 @@ int	init_coders(t_args arr, t_dongle *dongles, t_coder *coders)
 		coders[i].left_dongle = dongles[i].id;
 		if (coders[i].id == 1)
 			coders[i].right_dongle = dongles[last_dongle].id;
-
-		//for now it is not '0' as intended
-		if (coders[i].id == last_dongle)
-			coders[i].right_dongle = dongles[0].id;
 		else
-			coders[i].right_dongle = dongles[i + 1].id;
+			coders[i].right_dongle = dongles[i - 1].id;
+		coders[i].last_compiled_at = 0;
+		coders[i].compiled = 0;
 		i++;
 	}
 	return (1);

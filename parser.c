@@ -6,7 +6,7 @@
 /*   By: irdzhupy <irdzhupy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 15:28:10 by irdzhupy          #+#    #+#             */
-/*   Updated: 2026/11/04 12:29:25 by irdzhupy         ###   ########.fr       */
+/*   Updated: 2026/11/11 10:19:32 by irdzhupy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,15 @@ int get_args(int argc, char **argv, t_args *arr)
     {
         if (!ft_atoi(argv[i] , &result[i - 1]))
             return (0);
+	if (result[i - 1] < 0)
+		return (0);
         i++;
     }
     scheduler = get_scheduler(argv[8]);
     if (!scheduler)
         return (0);
     arr->number_of_coders = result[0];
-	arr->time_to_burnout = result[1];
+    arr->time_to_burnout = result[1];
 	arr->time_to_compile = result[2];
 	arr->time_to_debug = result[3];
 	arr->time_to_refactor = result[4];

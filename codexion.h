@@ -6,6 +6,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include <limits.h>
+#include <pthread.h>
+
+
+#include <time.h>
 
 typedef struct	s_args
 {
@@ -23,6 +27,7 @@ typedef struct	s_dongle
 {
 	int	id;
 	bool	in_use;
+	pthread_mutex_t	mutex;
 }	t_dongle;
 
 typedef struct s_coder
@@ -30,6 +35,8 @@ typedef struct s_coder
 	int	id;
 	int	left_dongle;
 	int	right_dongle;
+	int	last_compiled_at;
+	int	compiled;
 }	t_coder;
 
 typedef struct 	s_sim
@@ -37,6 +44,7 @@ typedef struct 	s_sim
 	t_args	arr;
 	t_coder	*coders;
 	t_dongle	*dongles;
+
 }	t_sim;
 
 int	get_args(int argc, char **argv, t_args *arr);
