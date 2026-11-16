@@ -6,7 +6,7 @@
 /*   By: irdzhupy <irdzhupy@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 17:32:39 by irdzhupy          #+#    #+#             */
-/*   Updated: 2026/11/16 11:47:26 by irdzhupy         ###   ########.fr       */
+/*   Updated: 2026/11/16 13:10:32 by irdzhupy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ int	main(int argc, char **argv)
 	start_time = get_current_time();
 	//printf("\nStart time: %ld\n", start_time);
 	print_all(arr, coders, dongles, start_time);
-	/*if (!create_threads(arr, coders))
-		return (error_exit("Thread creation failed\n"));*/
-	free(coders);
-	free(dongles);
+	if (!create_threads(arr, coders))
+		return (error_exit("Thread creation failed\n"));
+	//free(coders);
+	// destroy mutex
+	//free(dongles);
 	return (0);
 }

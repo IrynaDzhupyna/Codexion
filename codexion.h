@@ -35,11 +35,11 @@ typedef struct	s_dongle
 
 typedef struct s_coder
 {
-	int	id;
-	int	left_dongle;
-	int	right_dongle;
-	int	last_compiled_at;
-	int	compiled;
+	int		id;
+	t_dongle	*left_dongle;
+	t_dongle	*right_dongle;
+	int		last_compiled_at;
+	int		compiled;
 	pthread_t	thread;
 }	t_coder;
 

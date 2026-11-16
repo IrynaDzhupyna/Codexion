@@ -6,7 +6,7 @@
 /*   By: irdzhupy <irdzhupy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 19:34:42 by irdzhupy          #+#    #+#             */
-/*   Updated: 2026/11/13 15:57:26 by irdzhupy         ###   ########.fr       */
+/*   Updated: 2026/11/16 12:03:37 by irdzhupy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	init_coders(t_args arr, t_dongle *dongles, t_coder *coders)
 	while (i < arr.number_of_coders)
 	{
 		coders[i].id = i + 1;
-		coders[i].left_dongle = dongles[i].id;
+		coders[i].left_dongle = &dongles[i];
 		if (coders[i].id == 1)
-			coders[i].right_dongle = dongles[last_dongle].id;
+			coders[i].right_dongle = &dongles[last_dongle];
 		else
-			coders[i].right_dongle = dongles[i - 1].id;
+			coders[i].right_dongle = &dongles[i - 1];
 		coders[i].last_compiled_at = 0;
 		coders[i].compiled = 0;
 		i++;

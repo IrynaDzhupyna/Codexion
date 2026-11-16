@@ -23,8 +23,8 @@ void	print_coders(t_args arr, t_coder *coders)
 	{
 		printf("\nCoder ID: %i\n", coders[i].id);
 		//printf("Thread result: %lu\n", coders[i].thread);
-		printf("Left dongle ID: %i\n", coders[i].left_dongle);
-		printf("Right dongle ID: %i\n", coders[i].right_dongle);
+		printf("Left dongle ID: %i\n", coders[i].left_dongle->id);
+		printf("Right dongle ID: %i\n", coders[i].right_dongle->id);
 		printf("Last compiled at %i\n", coders[i].last_compiled_at);
 		printf("Compiled %i time\n", coders[i].compiled);
 		i++;
