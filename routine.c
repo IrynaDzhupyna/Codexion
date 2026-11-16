@@ -6,33 +6,25 @@
 /*   By: irdzhupy <irdzhupy@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 10:27:25 by irdzhupy          #+#    #+#             */
-/*   Updated: 2026/11/11 20:50:45 by irdzhupy         ###   ########.fr       */
+/*   Updated: 2026/11/16 11:39:54 by irdzhupy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-int	compile(t_args arr)
+int	compile(t_coder *coder)
 {
-	if (arr.time_to_compile < 0)
+	if (!coder)
 		return (0);
-	sleep(arr.time_to_compile);
-	return (1);
-}
-
-int	debug(t_args arr)
-{
-	if (arr.time_to_debug < 0)
+	if (pthread_mutex_lock(coder->left_dongle->mutex) != 0)
 		return (0);
-	sleep(arr.time_to_debug);
-	return (1);
-}
-
-int	refactor(t_args arr)
-{
-	if (arr.time_to_refactor < 0)
+	if (pthread_mutex_lock(coder->right_dongle) != 0)
 		return (0);
-	sleep(arr.time_to_refactor);
+	usleep(20);
+	if (pthread_mutex_unlock(coder->left_dongle) != 0)
+		return (0);
+	if (pthread_mutex_unlock(coder->right_dongle) != 0)
+		return (0);
 	return (1);
 }
 
@@ -40,18 +32,14 @@ void	*coder_routine(void *args)
 {
 	t_coder	*coder;
 
-	coder = (t_coder *)args;
+	coder = (t_coder *)args;i
+	compile(coder);
+	usleep(10);
+	usleep(5);
 
-	while (simulation.is_finished)
-	{
-		take_dongle();
-
-	// mutex_lock for two
-	// so the in_use stays the same
-	if (!compile())
-	       return (0);
-	//mutex_unlock for two
-	if (!(debug() || refactor()))
-		return (0);
-	return (1);
+	// while i < nb_compiled or !coder_burnedout()
+	// 	compile() - lock_dongle, take dongle, usleep(), unlock_dongle
+	// 	debug() - usleep()
+	// 	refactor() - usleep()
+	return (NULL);
 }

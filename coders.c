@@ -6,7 +6,7 @@
 /*   By: irdzhupy <irdzhupy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 19:34:42 by irdzhupy          #+#    #+#             */
-/*   Updated: 2026/11/11 14:33:37 by irdzhupy         ###   ########.fr       */
+/*   Updated: 2026/11/13 15:57:26 by irdzhupy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,22 @@ int	init_coders(t_args arr, t_dongle *dongles, t_coder *coders)
 		coders[i].compiled = 0;
 		i++;
 	}
+	return (1);
+}
+
+int	create_threads(t_args arr, t_coder *coders)
+{
+	int	i;
+
+	i = 0;
+	while (i < arr.number_of_coders)
+	{
+		if (pthread_create(&coders[i].thread, NULL, &coder_routine, &coders[i].id) != 0)
+			return (0);
+		if (pthread_join(coders[i].thread, NULL) != 0)
+			return (0);
+		i++;
+	}
+	// do we need to check extra if all coders have been initiated
 	return (1);
 }

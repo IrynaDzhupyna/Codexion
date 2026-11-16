@@ -1,3 +1,4 @@
+//should we have a header here???
 #ifndef CODEXION_H
 #define CODEXION_H
 
@@ -7,6 +8,8 @@
 #include <string.h>
 #include <limits.h>
 #include <pthread.h>
+#include <sys/time.h>
+#include <unistd.h>
 
 
 #include <time.h>
@@ -37,6 +40,7 @@ typedef struct s_coder
 	int	right_dongle;
 	int	last_compiled_at;
 	int	compiled;
+	pthread_t	thread;
 }	t_coder;
 
 typedef struct 	s_sim
@@ -47,12 +51,29 @@ typedef struct 	s_sim
 
 }	t_sim;
 
+//parser.c
 int	get_args(int argc, char **argv, t_args *arr);
 
+//dongles.c
 int	init_dongles(t_args arr, t_dongle *dongles);
+
+//coders.c
 int	init_coders(t_args arr, t_dongle *dongles, t_coder *coders);
+int	create_threads(t_args arr, t_coder *coders);
+
+
+//routine.c
+void	*coder_routine(void *args);
+
+//utils.c
+long	get_current_time(void);
+long	get_elapsed_time(long start_time);
+
+//print.c
 void	print_args(t_args arr);
 void	print_dongles(t_args arr, t_dongle *dongles);
 void	print_coders(t_args arr, t_coder *coders);
+void	print_time(long start_time);
+void	print_all(t_args arr, t_coder *coders, t_dongle *dongles, long start_time);
 
 #endif
